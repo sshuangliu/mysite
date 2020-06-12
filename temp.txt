@@ -1,0 +1,44 @@
+python manage.py startapp learn
+
+
+python manage.py makemigrations
+python manage.py migrate
+
+python manage.py runserver 0.0.0.0:8001
+
+#https://www.cnblogs.com/kevingrace/p/5690241.html
+create .gitignore file:
+*.pyc
+
+if want to delete relaete file:
+git rm *.pyc --cached
+
+clone to local computer:
+git clone https://github.com/CKTim/BlueTooth.git
+
+new repository:
+echo "# mysite_test" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+
+(git remote rm origin)
+git remote add origin git@github.com:sshuangliu/mysite_test.git
+git remote add origin https://github.com/sshuangliu/mysite_test.git
+
+这个带有-u这个参数是指，将master分支的所有内容都提交，第一次关联之后后边你再提交就可以不用这个参数了，之后你的每一次修改，你就可以只将你修改push就好了。
+git push -u origin master
+
+
+
+git status
+git add .
+
+git client update:
+git update-git-for-windows
+
+new ssh-key pair:
+path: home/.ssh
+$ ssh-keygen -t rsa -C "youremail@example.com"
+
+hahaahhahh

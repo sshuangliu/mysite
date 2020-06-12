@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<title></title>
+	{# 为了在Form中添加必选项的星,需要添加的css #}
+    <style type="text/css">
+    label.required::before {
+        content: "*";
+        color: red;
+    }
+    </style>
+
+</head>
+<body>
+	<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<div class="container">
+
+<h2 style="color: cornflowerblue"><strong>Device update/delete</strong></h2><br>
+{% include 'notifaction.html' %}
+<form action="", method="post">
+{# CSRF跨站请求伪造 #}
+{# 添加CSRF防护的隐含参数Token,这是必须配置内容,并不是可选,注意使用render来渲染页面 #}
+{% csrf_token %}
+{#渲染表单参考文档#}
+{#https://docs.djangoproject.com/en/dev/topics/forms/#rendering-fields-manually#}
+{#{{ form.as_table }}<br> form的属性会自动unpack，例如以tab形式展开 #}
+{# <tr class="required"><th><label class="required" for="id_device_name">设备名:</label></th><td><input type="text" name="device_name" class="form-control" maxlength="50" required id="id_device_name"></td></tr>   #}
+{# 手动提取form属性展开 #}
+{# fomr表单级别的error #}
+{# <div style="display: inline;color: crimson" >{{ form.errors }}</div> #}
+{% for field in form %}
+    <div class="fieldWrapper">
+        <span><div style="display: inline" >{{ field.label_tag }}</div></span>
+        {# 字段级别的error #}
+        <span><div style="display: inline;color: crimson" >{{ field.errors }}</div></span>
+        {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+{% endfor %}
+<br>
+{# 调整了bootstrap的显示样式 https://getbootstrap.com/docs/4.1/components/buttons/#button-tags#}
+    <input class="btn btn-primary btn-lg" type='submit' value='提交'>
+    <a href="/device_del/{{ device_id }}" onclick="return confirmAct();" data-toggle="tooltip" data-placement="top" title="删除此设备信息" class="btn btn-primary btn-lg">删除</a>
+</form>
+</div>
+
+</script>
+
+    {# 提示删除确认警告的JavaScript #}
+    <script type="text/javascript">
+        function confirmAct()
+        {
+            if(confirm('是否确定删除此条目?'))
+            {
+                return true;
+            }
+            return false;
+        }
+</script>
+
+</body>
+</html>

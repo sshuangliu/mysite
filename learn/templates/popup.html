@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>正在返回</title>
+</head>
+<body>
+	 <span class="message"><div class="alert alert-success" role="alert">{{ infor }}</div></span>
+<script>
+
+    (function (infor) {
+        window.opener.callback(infor);
+        window.close();
+    })("{{ infor }}")
+
+</script>
+</body>
+</html>

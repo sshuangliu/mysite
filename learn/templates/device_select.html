@@ -1,0 +1,491 @@
+{% extends 'base.html' %}
+{% block title %}
+    cmdb_asset(mini)
+{% endblock title %}
+
+{% block css_001 %}
+	<style type="text/css">
+      /* reset.css */
+      html, body, div, span, applet, object, iframe,
+      h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+      a, abbr, acronym, address, big, cite, code,
+      del, dfn, em, img, ins, kbd, q, s, samp,
+      small, strike, strong, sub, sup, tt, var,
+      b, u, i, center,
+      dl, dt, dd, ol, ul, li,
+      fieldset, form, label, legend,
+      table, caption, tbody, tfoot, thead, tr, th, td,
+      article, aside, canvas, details, embed,
+      figure, figcaption, footer, header, hgroup,
+      menu, nav, output, ruby, section, summary,
+      time, mark, audio, video {
+        margin: 0; padding: 0; border: 0; font-size: 100%; font: inherit; vertical-align: baseline;
+      }
+      /* HTML5 display-role reset for older browsers */
+      article, aside, details, figcaption, figure,
+      footer, header, hgroup, menu, nav, section { display: block; }
+      body { line-height: 1; }
+      ol, ul { list-style: none; }
+      blockquote, q { quotes: none; }
+      blockquote:before, blockquote:after,
+      q:before, q:after { content: ''; content: none; }
+      table { border-collapse: collapse; border-spacing: 0; }
+
+      /* ansible-cmdb */
+      *, body { font-family: sans-serif; font-weight: lighter; }
+      a { text-decoration: none; }
+      b { font-weight: bold; }
+      p { margin-bottom: 1em; }
+
+      header { position: fixed; top: 0px; left: 0px; right: 0px; background-color: #0071b8; overflow: auto; color: #E0E0E0; padding: 15px; z-index: 1000; }
+      header h1 { font-size: x-large; float: left; line-height: 32px; font-weight: bold; }
+      header #clear_settings { float: right; line-height: 32px; font-size: small; margin-left: 12px; }
+      header #clear_settings a { color: #FFFFFF; font-weight: bold; padding: 6px; background-color: #0090F0; box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.15); }
+      header #generated { float: right; line-height: 32px; font-size: small; }
+      header #top { display: none; }
+      header #top a { line-height: 32px; margin-left: 64px; color: #FFFFFF; border-bottom: 1px solid #909090; }
+      header #generated .detail { font-weight: bold; }
+
+      footer { display: block; position: fixed; bottom: 0px; right: 0px; left: 0px; background-color: #d5d5d5; overflow: auto; color: #505050; padding: 4px; font-size: x-small; text-align: right; padding-right: 8px; }
+      footer a { font-weight: bold; text-decoration: none; color: #202020; }
+
+      #clear_settings { float: right; line-height: 32px; font-size: small; margin-top: 20px; margin-left: 12px;}
+      #clear_settings a { color: #FFFFFF; font-weight: bold; padding: 6px; background-color: #0090F0; box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.15); }
+
+      #col_toggles { margin: 32px; margin-top: 20px; }
+      #col_toggles h2 { display: block; font-size: 1.4em; margin-bottom: 32px; color: #606060; }
+      #col_toggle_buttons { margin-left: 32px; font-weight: normal; line-height: 40px; }
+      #col_toggles a { line-height: 40px; }
+      #col_toggles a { display: inline-block; background-color: #009688; line-height: 32px; padding: 0px 15px 0px 15px; margin-right: 6px; box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.35); color: #FFFFFF; }
+      #col_toggles a.col-invisible { background-color: #B0B0B0; box-shadow: 0 0px 0px 0; }
+
+      #host_overview { margin: 32px; }
+      #host_overview h2 { display: block; font-size: 1.4em; color: #606060; }
+      #host_overview_tbl_wrapper{ margin-left: 16px; }
+      #host_overview table { width: 100%; clear: both; }
+      #host_overview tr { border-bottom: 1px solid #F0F0F0; }
+      #host_overview tr:hover { background-color: #F0F0F0; }
+      #host_overview thead th { text-align: left; color: #707070; padding: 16px 0px 8px 16px; border-bottom: 1px solid #C0C0C0; font-weight: bold; cursor: pointer; background-repeat: no-repeat; background-position: center right; background-image: url("https://cdn.datatables.net/1.10.2//images/sort_both.png"); }
+      #host_overview thead th.sorting_desc { background-image: url("https://cdn.datatables.net/1.10.2//images/sort_desc.png"); }
+      #host_overview thead th.sorting_asc { background-image: url("https://cdn.datatables.net/1.10.2//images/sort_asc.png"); }
+      #host_overview tbody td { color: #000000; padding: 8px 12px 8px 12px; }
+      #host_overview tbody a { text-decoration: none; color: #005c9d; }
+      #host_overview_tbl_filter { float: right; color: #808080; padding-bottom: 32px; }
+      #host_overview_tbl_filter label input { margin-left: 12px; }
+      #host_overview_tbl_filter #filter_link a { color: #000000; background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAoUlEQVR4Xu2TIQ6EMBBF/+4dOUBFBYoboBHoBsuRUCgcnpDg3/Y7ICQVK3ebvPxJ30xH9QXom/PO/PoDAjSOY8pwIwFFr2EYUobjONj33bjGd3Ylr77v2bYNp7Hwhifs3HOeUdu2LMuCE1DXdedtl612cJ1R0zRM04TT1HVNjPERO/ecZxRCSBnmeWZdV+Ma39mVvABVVZUy3EhA0f//gvQB4y08WIiD/goAAAAASUVORK5CYII=) no-repeat left center; padding: 5px 0 5px 25px; }
+      #host_overview_tbl_info { margin-top: 16px; color: #C0C0C0; }
+      #host_overview .bar { clear: both; margin-bottom: 1px; }
+      #host_overview .prog_bar_full { float: left; display: block; height: 12px; border: 1px solid #000000; padding: 1px; margin-right: 4px; color: white; text-align: center; }
+      #host_overview .prog_bar_used { display: block; height: 12px; background-color: #8F4040; }
+      #host_overview tbody td.error a { color: #FF0000; }
+      #host_overview span.usage_detail { color: #606060; }
+      #host_overview .error { color: #FF0000; }
+
+      #hosts { margin-left: 32px; margin-bottom: 120px; }
+      #hosts .toggle-collapse { cursor: pointer; }
+      #hosts a.toggle-all { margin-top: 20px; display: inline-block; color: #0080FF; }
+      #hosts a { color: #005c9d; }
+      #hosts p.desc { color: #303030; margin-bottom: 32px; max-width: 800px; }
+      #hosts h3.collapsed::before { color: #505050; margin-right: 16px; content: "⊞";  font-weight: 200; font-size: large; }
+      #hosts h3.uncollapsed::before { color: #505050; margin-right: 16px; content: "⊟";  font-weight: 200; font-size: large;}
+      #hosts h4.collapsed::before { color: #505050; margin-right: 16px; content: "⊞";  font-weight: 200; font-size: large;}
+      #hosts h4.uncollapsed::before { color: #505050; margin-right: 16px; content: "⊟"; font-weight: 200; font-size: large;}
+      #hosts h5.collapsed::before { color: #505050; margin-right: 16px; content: "⊞";  font-weight: 200; font-size: large;}
+      #hosts h5.uncollapsed::before { color: #505050; margin-right: 16px; content: "⊟"; font-weight: 200; font-size: large;}
+      #hosts div.collapsable { margin-left: 16px; }
+      #hosts div.collapsed { display: none; }
+      #hosts h3.uncollapsed { line-height: 1.5em; font-size: xx-large; border-bottom: 1px solid #D0D0D0; }
+      #hosts h3.collapsed {  line-height: 1.5em; font-size: xx-large; }
+      #hosts h4 { font-size: large; font-weight: bold; color: #404040; margin-top: 32px; margin-bottom: 32px; }
+      #hosts h5 { font-weight: bold; color: #404040; margin-top: 32px; margin-bottom: 32px; }
+      #hosts th { text-align: left; color: #808080; padding-bottom: 10px; }
+      #hosts td { padding-left: 16px; color: #303030; padding-bottom: 10px; }
+      #hosts ul { list-style: square; margin-left: 48px; }
+      #hosts table.net_overview td, #hosts table.net_overview th { text-align: left; padding: 0px 0px 8px 16px; margin: 0px; }
+      #hosts table.net_overview { margin: 16px 0px 16px 0px; }
+      #hosts .error { color: #FF0000; }
+    </style>
+
+{% endblock css_001 %}
+
+{% block JS_001 %}
+<!-- DataTables assets -->
+      <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.2//js/jquery.dataTables.js"></script>
+{% endblock JS_001 %}
+
+{% block body %}
+
+<span id="clear_settings"><a href="#" onclick="popupFunc('/device_add');" title="If things are acting weird, press this button">Device add</a></span>
+
+<span id="clear_settings"><a href="javascript:window.localStorage.clear('columnVisibility'); location.reload();" title="If things are acting weird, press this button">Clear settings</a></span> 
+
+<div id="col_toggles">
+    <h2>Shown columns</h2>
+    <div id="col_toggle_buttons">
+        <a href="" class="col-toggle col-visible" data-column="0" data-column-id="#"></a>
+
+        <a href="" class="col-toggle col-visible" data-column="1" data-column-id="device_name">Device Name</a>
+        
+        <a href="" class="col-toggle col-invisible" data-column="2" data-column-id="manage_ip">Manage IP</a>
+        
+        <a href="" class="col-toggle col-invisible" data-column="3" data-column-id="produce">Produce</a>
+        
+        <a href="" class="col-toggle col-invisible" data-column="4" data-column-id="os_software_version">OS/Software Version</a>
+        
+        <a href="" class="col-toggle col-invisible" data-column="5" data-column-id="device_type">Device Type</a>
+        
+        <a href="" class="col-toggle col-invisible" data-column="6" data-column-id="serial_number">Serial number</a>
+        
+        <a href="" class="col-toggle col-visible" data-column="7" data-column-id="login_u_p">login U/P</a>
+        
+        <a href="" class="col-toggle col-visible" data-column="8" data-column-id="location">Location</a>
+        
+        <a href="" class="col-toggle col-invisible" data-column="9" data-column-id="warranty_expiration">Warranty expiration</a>
+        
+        <a href="" class="col-toggle col-invisible" data-column="10" data-column-id="service_contract">Service Contract</a>
+        
+        <a href="" class="col-toggle col-visible" data-column="11" data-column-id="initialization_timestamp">Initialization timestamp</a>
+        
+        <a href="" class="col-toggle col-invisible" data-column="12" data-column-id="last_modification_timestamp">Last modification timestamp</a>
+        
+        <a href="" class="col-toggle col-invisible" data-column="13" data-column-id="comments">Comments</a>
+        
+        
+    </div>
+  </div>
+
+
+<div id="host_overview">
+    <h2>Host overview</h2>
+    <div id="host_overview_tbl_wrapper">
+      <table id="host_overview_tbl" class="demo display dataTable compact">
+      <thead>
+        <tr>
+        	<th>#</th>
+            <th>Device Name</th>
+            <th>Manage IP</th>
+            <th>Produce</th>
+            <th>OS/Software Version</th>
+            <th>Device Type</th>
+            <th>Serial number</th>
+            <th>login U/P</th>
+            <th>Location</th>
+            <th>Warranty expiration</th>
+            <th>Service Contract</th>
+            <th>Initialization timestamp</th>
+            <th>Last modification timestamp</th>
+            <th>Comments</th>
+            
+        </tr>
+      </thead>
+      <tbody>
+          {#jinja2 传入的为一个字典构成的列表，通过key取值#}
+          {% for item in cmdb_asset_all %}
+            <tr>                  
+            	<th scope="row">{{ forloop.counter }}</th>
+            	<td>
+    <a href="#" onclick="popupFunc('/device_update/{{ item.device_id }}');" class="">{{ item.device_name }}</a>
+</td>                  <td>
+  {{ item.manage_ip }}
+</td>                  <td>
+  {{ item.produce }}
+</td>                  <td>
+  {{ item.os_software_version }}
+</td>                  <td>
+  {{ item.device_type }}
+</td>                  <td>
+  {{ item.serial_number }}
+</td>                  <td>
+  {{ item.login_u_p }}
+</td>                  <td>
+  {{ item.location }}
+</td>                  <td>
+  {{ item.warranty_expiration }}
+</td>                  <td>
+  {{ item.service_contract }}
+</td>                  <td>
+    {{ item.initialization_timestamp }}
+</td>                  <td>
+  {{ item.last_modification_timestamp }}
+</td>                  <td>
+  {{ item.comments }}
+</td>                 
+ </tr>
+{% endfor %}
+
+</tbody>
+      </table>
+    </div>
+  </div>
+
+
+   <footer>
+    <p>Generated by <a href="https://github.com/fboender/ansible-cmdb">ansible-cmdb</a> vMASTER &dash; &copy; Ferry Boender 2017</p>
+  </footer>
+
+
+
+  <script>
+$(document).ready( function () {
+  
+  function getQueryParams(qs) {
+    qs = qs.split('+').join(' ');
+    var params = {},
+      tokens,
+      re = /[?&]?([^=]+)=([^&]*)/g;
+    while (tokens = re.exec(qs)) {
+      params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+    }
+    return params;
+  }
+
+  // Get persisted column visibility from localStorage.
+  var columnVisibility = localStorage.getItem("columnVisibility");
+  if (columnVisibility == null) {
+    columnVisibility = {
+    	'#':true,
+        "device_name": true,
+        "manage_ip": true,
+        "produce": true,
+        "os_software_version": false,
+        "device_type": true,
+        "serial_number": false,
+        "login_u_p": false,
+        "location": true,
+        "warranty_expiration": false,
+        "service_contract": false,
+        "initialization_timestamp": false,
+        "last_modification_timestamp": false,
+        "comments": true,
+    };
+    localStorage.setItem("columnVisibility", JSON.stringify(columnVisibility));
+  } else {
+    columnVisibility = JSON.parse(columnVisibility);
+  }
+
+  // Initialize the DataTables jQuery plugin on the host overview table
+  var table = $('#host_overview_tbl').DataTable({
+    paging: false,
+    columnDefs: [
+        {
+          "targets": [0],
+          "visible": true,
+          "sType": "num"
+        },
+        {
+          "targets": [1],
+          "visible": true,
+          "sType": "string"
+        },
+        {
+          "targets": [2],
+          "visible": true,
+          "sType": "string"
+        },
+        {
+          "targets": [3],
+          "visible": true,
+          "sType": "string"
+        },
+        {
+          "targets": [4],
+          "visible": false,
+          "sType": "string"
+        },
+        {
+          "targets": [5],
+          "visible": true,
+          "sType": "string"
+        },
+        {
+          "targets": [6],
+          "visible": false,
+          "sType": "string"
+        },
+        {
+          "targets": [7],
+          "visible": false,
+          "sType": "string"
+        },
+        {
+          "targets": [8],
+          "visible": true,
+          "sType": "string"
+        },
+        {
+          "targets": [9],
+          "visible": false,
+          "sType": "string"
+        },
+        {
+          "targets": [10],
+          "visible": false,
+          "sType": "string"
+        },
+        {
+          "targets": [11],
+          "visible": false,
+          "sType": "string"
+        },
+        {
+          "targets": [12],
+          "visible": false,
+          "sType": "string"
+        },
+        {
+          "targets": [13],
+          "visible": true,
+          "sType": "string"
+        },
+    ],
+    "fnInitComplete": function() {
+      // Focus the input field
+      $("#host_overview_tbl_filter input").focus();
+
+      // Set the search box value to the query string 'search' part
+      var qp = getQueryParams(document.location.search);
+      if ("search" in qp) {
+        $("#host_overview_tbl_filter input").val(qp.search);
+        this.fnFilter(qp.search);
+      }
+    }
+  });
+
+  // Display or hide columns based on localStorage preferences.
+  for (var columnId in columnVisibility) {
+    var columnButton = $("a[data-column-id='" + columnId +"']");
+    var columnNr = columnButton.attr('data-column');
+    var column = table.column(columnNr);
+    column.visible(columnVisibility[columnId]);
+    var newClass = ['col-invisible','col-visible'][Number(column.visible())];
+    columnButton.get(0).className = 'col-toggle ' + newClass;
+  }
+
+  // Show a direct link to the search term
+  table.on( 'search.dt', function () {
+    $('#filter_link').remove();
+    if (table.search() == "") {
+    } else {
+      $('#host_overview_tbl_filter label').after('<span id="filter_link">&nbsp; <a title="Direct link to search" href="?search='+table.search()+'">&nbsp;</a></span>');
+    }
+  } );
+
+  // Show and hide columns on button clicks
+  $('a.col-toggle').on('click', function(e) {
+    e.preventDefault();
+    var columnId = $(this).attr('data-column-id')
+    var column = table.column( $(this).attr('data-column') );
+    column.visible( ! column.visible() );
+    var newClass = ['col-invisible','col-visible'][Number(column.visible())];
+    e.target.className = 'col-toggle ' + newClass;
+
+    // Storage column visibility in localStorage.
+    columnVisibility[columnId] = column.visible();
+    localStorage.setItem("columnVisibility", JSON.stringify(columnVisibility));
+  });
+
+  // Open the Detailed host information when jumping to a host.
+  $('#host_overview td a').on('click', function(e) {
+    var hostId=$(this).attr('href').substr(1);
+    var hostElem = $("h3[data-host-name='"+hostId+"']");
+    hostElem.addClass('uncollapsed');
+    hostElem.removeClass('collapsed');
+    hostElem.next().removeClass('collapsed');
+  });
+
+  
+  // Open the detailed host information when clicking on the hosts header
+  $('.toggle-collapse').on('click', function(e) {
+    $(this).toggleClass('collapsed');
+    $(this).toggleClass('uncollapsed');
+    $(this).next().toggleClass('collapsed');
+  });
+
+  // Toggle opening and closing all information for a host.
+  $('a.toggle-all').on('click', function(e) {
+    e.preventDefault();
+    if ($(this).text() == "Open all") {
+      $(this).siblings('.collapsed').each(function(item) {
+        $(this).addClass('uncollapsed');
+        $(this).removeClass('collapsed');
+        $(this).next().toggleClass('collapsed');
+      });
+      $(this).text("Close all");
+    } else {
+      $(this).text("Open all");
+      $(this).siblings('.uncollapsed').each(function(item) {
+        $(this).addClass('collapsed');
+        $(this).removeClass('uncollapsed');
+        $(this).next().toggleClass('collapsed');
+      });
+    }
+  });
+
+
+  // Show host name in header bar when scrolling
+  $( window ).scroll(function() {
+    var scrollTop = $(window).scrollTop();
+    var curElem = false;
+    $( "#hosts h3" ).each(function( index ) {
+      var el = $(this);
+      if ((el.offset().top - 128) <= scrollTop) {
+        curElem = el;
+      } else {
+        return false;
+      }
+    });
+    if (curElem) {
+      $("header h1").text(curElem.text());
+      $('#top').show();
+    } else {
+      $("header h1").text("Host Overview");
+      $('#top').hide();
+    };
+  });
+});
+
+	//js暂停函数  
+function Pause(obj,iMinSecond){   
+   if (window.eventList==null) window.eventList=new Array();   
+   var ind=-1;   
+   for (var i=0;i<window.eventList.length;i++){   
+       if (window.eventList[i]==null) {   
+         window.eventList[i]=obj;   
+         ind=i;   
+         break;   
+        }   
+    }   
+   if (ind==-1){   
+   ind=window.eventList.length;   
+   window.eventList[ind]=obj;   
+   }   
+  setTimeout("GoOn(" + ind + ")",iMinSecond);   
+};
+  
+//js继续函数  
+function GoOn(ind){   
+  var obj=window.eventList[ind];   
+  window.eventList[ind]=null;   
+  if (obj.NextStep) obj.NextStep();   
+  else obj();   
+};
+
+// 弹出编辑窗口
+popupFunc = function (url001) {
+        window.open(url001, '_blank', 'location=yes,height=520,width=520,scrollbars=yes,status=yes')
+      //open(url, name, 窗口参数)，注意name不能重名
+    };
+
+// update弹窗关闭后的callback函数
+callback = function (infor) {
+		window.alert(infor)
+		Pause(this,2000);
+		this.NextStep = function(){
+		window.location.reload();
+		}
+	};
+</script>
+
+
+{% endblock body %}
