@@ -1,1 +1,1 @@
-# mysite_test
+# mysite_cmdb_demo
