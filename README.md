@@ -33,7 +33,7 @@ SQlite3 你可以换其他SQL（MySQL PostgreSQL）
 ~~~
 git clone git@github.com:sshuangliu/mysite.git
 ~~~
-* 运行该项目（在虚拟环境下）管理员用户信息（包括Django后台） admin/123456
+* 运行该项目（在虚拟环境下）管理员用户信息（包括Django后台） admin/123456 正常使用请部署到Nginx或Apache
 ~~~
 cd 项目所在根目录
 python manage.py runserver
