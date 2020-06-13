@@ -14,12 +14,15 @@ Django 3.x
 python 3.x
 
 ##### 安装项目到本地（Windows为例，Linux基本相同）
-* 配置虚拟环境
+* 配置虚拟环境venv（与本地python环境隔离）
 ~~~
 ...\> py -m venv project-name
 ...\> project-name\Scripts\activate.bat
 ~~~
-
+*安装Django（在虚拟环境下安装）
+~~~
+...\> py -m pip install Django
+~~~
 
 
 
