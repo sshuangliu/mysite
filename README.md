@@ -13,7 +13,10 @@ GitHub supports emoji!
 [ansible-cmdb](https://github.com/fboender/ansible-cmdb)
 ##### 环境
 Django 3.x
+
 python 3.x
+
+SQlite3 你可以换其他SQL（MySQL PostgreSQL）
 
 ##### 安装项目到本地（Windows为例，Linux基本相同）
 * 配置虚拟环境venv（与本地python环境隔离）
