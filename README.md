@@ -53,7 +53,7 @@ python manage.py runserver 0.0.0.0:8000
 
 ![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/login.png)
 
-![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/asset.png)
+![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/asset.png?raw=true)
 
 ![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/device_add.png)
 
