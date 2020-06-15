@@ -21,8 +21,14 @@ SQlite3 你可以换其他SQL（MySQL PostgreSQL）
 ##### 安装项目到本地（Windows为例，Linux基本相同）
 * 配置虚拟环境venv（与本地python环境隔离）
 ~~~
-...\> py -m venv project-name
+Windows：
+...\> python -m venv project-name
 ...\> project-name\Scripts\activate.bat 激活虚拟环境
+
+Centos7：
+# python -m venv project-name
+# source my_venv_001/bin/activate 激活虚拟环境
+# deactivate 退出虚拟环境
 ~~~
 * 安装Django（在虚拟环境下安装）默认安装源 卡的一比，自己搜索去换个或者全局代理后科学安装
 ~~~
