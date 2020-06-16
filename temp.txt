@@ -1,3 +1,5 @@
+mysite pwd:admin/123456
+
 python manage.py startapp learn
 
 
