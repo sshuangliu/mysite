@@ -30,4 +30,5 @@ urlpatterns = [
     path('device_add/', learn_views.device_add, name='device_add'),
     path('device_update/<int:device_id>', learn_views.device_update, name='device_update'),
     path('device_del/<int:device_id>', learn_views.device_del, name='device_del'),
+    path('download/<str:asset>', learn_views.download, name='download'),
 ]

@@ -1,0 +1,8 @@
+﻿device_name,manage_ip,produce,os_software_version,device_type,serial_number,login_u_p,location,warranty_expiration,service_contract,last_modification_timestamp,initialization_timestamp,comments,device_op
+PNR02NSO,172.25.180.167,ISR4451-X/K9,isr4400-universalk9.03.16,router,FGL2111105H,ad account,SH-IDC,2020-0220,400-xxx-xx-x,2020-06-11 08:04:45,2020-06-08 06:26:55,IDC FOR HQ 34M LINE  202020202,正常(Normal)
+test1222,,ISR4451-X/K9,isr4400-universalk9.03.16,router,xxdxdxedddddxdxd,ad account,SH-IDC,,,2020-06-08 06:27:34,2020-06-08 06:27:34,hahaha,已删除(Deleted)
+PNR01NSO,172.25.180.165,ISR4451-X/K9,isr4400-universalk9.03.16,router,FGL202511HE,ad account,SH-IDC,2020-0220,400-xxx-xx-x,2020-06-11 08:34:59,2020-06-08 07:35:26,"hahaha  34M 
+哈哈",正常(Normal)
+pns01shahq-1,172.25.61.4,WS-C3850-48P-E ,,switch-stack,,,SH-HQ,,,2020-06-13 00:17:13,2020-06-10 07:49:05,1111,正常(Normal)
+pns01shahq-1,172.25.61.4,WS-C3850-48P-E,,switch-stack,,,SH-HQ,,,2020-06-13 23:23:47,2020-06-10 10:26:42,,正常(Normal)
+pns01shahq-1223rr,172.25.180.166,WS-C3850-48P-E,,app_server,,,SH-HQ,,,2020-06-12 09:23:26,2020-06-10 10:37:50,立刻就会给房东手里空间和规范,已删除(Deleted)

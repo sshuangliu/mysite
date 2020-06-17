@@ -7,6 +7,10 @@ import json
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
 from django.contrib.auth import authenticate, login, logout
+import csv,codecs
+from django.http import FileResponse
+from datetime import datetime
+import os
 # Create your views here.
 
 # coding:utf-8
@@ -37,6 +41,58 @@ def app_logout(request):
     logout(request)
     return HttpResponseRedirect('/accounts/login')
 
+@login_required()
+def download(request, asset):
+    root_path = os.path.abspath('.')  # 项目根目录
+    print(root_path)
+    if asset == 'asset_list':
+        new_path = os.path.join(root_path, 'media')
+        print(new_path)
+        filename = 'asset_list' + '_' + datetime.now().strftime('%Y-%m-%d_%H-%M-%S') + '.csv'
+        asset_all = CMDB_ASSET.objects.all()    
+        with codecs.open(os.path.join(new_path, filename), 'w', encoding='utf_8_sig') as csvfile:
+            fieldnames = [
+                'device_name', 
+                'manage_ip',
+                'produce',
+                'os_software_version',
+                'device_type',
+                'serial_number',
+                'login_u_p',
+                'location',
+                'warranty_expiration',
+                'service_contract',
+                'last_modification_timestamp',
+                'initialization_timestamp',
+                'comments',
+                'device_op',
+                ]
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            writer.writeheader()
+            for item in asset_all:
+                writer.writerow({
+                    'device_name': item.device_name,
+                    'manage_ip': item.manage_ip,
+                    'produce': item.produce,
+                    'os_software_version': item.os_software_version,
+                    'device_type': item.device_type,
+                    'serial_number': item.serial_number,
+                    'login_u_p': item.login_u_p,
+                    'location': item.location,
+                    'warranty_expiration': item.warranty_expiration,
+                    'service_contract': item.service_contract,
+                    'initialization_timestamp': item.initialization_timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+                    'last_modification_timestamp': item.last_modification_timestamp.strftime("%Y-%m-%d %H:%M:%S"),
+                    'comments': item.comments, 
+                    'device_op': '正常(Normal)' if item.device_op else '已删除(Deleted)' , 
+
+                    })
+
+        file=open(os.path.join(new_path, filename),'rb')
+        response = FileResponse(file)
+        response['Content-Type']='text/csv'
+        response['Content-Disposition']=f'attachment;filename={filename}'
+        return response
 
 @login_required()
 def index(request):
