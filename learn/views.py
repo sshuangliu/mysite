@@ -43,7 +43,7 @@ def app_logout(request):
 
 @login_required()
 def download(request, asset):
-    root_path = os.path.abspath('.')  # 项目根目录
+    root_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # 项目根目录
     print(root_path)
     if asset == 'asset_list':
         new_path = os.path.join(root_path, 'media')
