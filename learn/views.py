@@ -15,6 +15,9 @@ import os
 
 # coding:utf-8
 
+def test(request):
+    return render(request, 'test.html')
+
 def app_login(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
