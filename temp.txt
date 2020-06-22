@@ -44,3 +44,8 @@ path: home/.ssh
 $ ssh-keygen -t rsa -C "youremail@example.com"
 
 hahaahhahh
+
+static_file:
+https://code.ziqiangxuetang.com/django/django-static-files.html
+https://blog.csdn.net/jehon/article/details/80101251
+
