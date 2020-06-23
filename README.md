@@ -4,7 +4,7 @@ GitHub supports emoji!
 :rocket: :metal: :octocat:
 
 ##### 介绍
-自己练手的一个基于Django web项目 （入门教程可以参考这个：https://code.ziqiangxuetang.com/django/django-tutorial.html
+基于Django web项目 （入门教程可以参考这个：https://code.ziqiangxuetang.com/django/django-tutorial.html
 
 目前上线 IT资产管理系统，增删查改，后续会慢慢增加其他功能：监控&告警，备份&巡检，IPDB（ip地址资源管理），设备配置（netconf rest api方式），集成Draw.io到本地，等其他小工具
 
