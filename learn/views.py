@@ -103,6 +103,11 @@ def index(request):
 
 
 @login_required()
+def topology_view(request):
+    return render(request, 'OMS_BBY.html')
+
+    
+@login_required()
 def mainpage(request):
     return render(request, 'mainpage.html')
 
