@@ -1,8 +1,73 @@
-<div class="card">
-                <div class="card-header">线性图表测试(Ajax数据) </div>
-                <div class="card-body">
-                    <!-- 图表会被绘制在下面的canvas内 -->
-                    hahah
-                </div>
-            </div>
+{% extends 'test2.html' %}
+
+{% block title %}
+    test page
+{% endblock title %}
+
+{% block body %}
+
+
+<div class="bootstrapiso">
+
+ <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #333;">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
         </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+<div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+  <div class="card-header">通告~~~</div>
+  <div class="card-body">
+    <h5 class="card-title">网址信息：</h5>
+    <p class="card-text">PRTG:<br>https://x.x.x.x/index.htm<br><br>
+    Solarwinds:<br>http://x.x.x.x/Orion</p>
+  </div>
+</div>
+
+<div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <h5 class="card-title">Secondary card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+  <div class="alert alert-primary" role="alert">
+  A simple primary alert—check it out!
+</div>
+
+
+</div>
+
+{% endblock body %}
