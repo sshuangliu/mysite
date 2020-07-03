@@ -227,5 +227,5 @@ def device_del(request, device_id):
         del_item.device_op = False
         del_item.save()
         return render(request, 'popup.html', {'infor': 'delete success!'})
-    except OPRS_DB.DoesNotExist:
+    except CMDB_ASSET.DoesNotExist:
         return render(request, 'popup.html', {'infor': '此设备不存在或已被删除！!'})
