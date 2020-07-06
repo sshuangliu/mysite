@@ -29,7 +29,7 @@ class Device_infor(forms.Form):
                                     widget=forms.TextInput(attrs={'class': "form-control"})
                                     )
 
-	os_software_version = forms.CharField(max_length=50,
+	os_software_version = forms.CharField(max_length=100,
                                     required=False,
                                     label='系统&软件版本(os_software_version)',
                                     widget=forms.TextInput(attrs={'class': "form-control"})
@@ -53,7 +53,7 @@ class Device_infor(forms.Form):
                                     attrs={'class': "form-control"})
                                 )
 
-	login_u_p = forms.CharField(max_length=50,
+	login_u_p = forms.CharField(max_length=100,
                                     required=False,
                                     label='登录信息(login_u_p)',
                                     widget=forms.TextInput(attrs={'class': "form-control"})
@@ -136,7 +136,7 @@ class Device_update(forms.Form):
                                     widget=forms.TextInput(attrs={'class': "form-control"})
                                     )
 
-	os_software_version = forms.CharField(max_length=50,
+	os_software_version = forms.CharField(max_length=100,
                                     required=False,
                                     label='系统&软件版本(os_software_version)',
                                     widget=forms.TextInput(attrs={'class': "form-control"})
@@ -160,7 +160,7 @@ class Device_update(forms.Form):
                                     attrs={'class': "form-control"})
                                 )
 
-	login_u_p = forms.CharField(max_length=50,
+	login_u_p = forms.CharField(max_length=100,
                                     required=False,
                                     label='登录信息(login_u_p)',
                                     widget=forms.TextInput(attrs={'class': "form-control"})
