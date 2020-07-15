@@ -1,0 +1,9 @@
+﻿device_name,manage_ip,produce,os_software_version,device_type,serial_number,login_u_p,location,warranty_expiration,service_contract,last_modification_timestamp,initialization_timestamp,comments,device_op
+PNR02xxx01,172.16.1.1,ISR4451-X/K9,isr4400-universalk,router,FGL211xxxx05H,ad account,SH-IDC,2020-0220,400-xxx-xx-x,2020-06-30 22:10:49,2020-06-08 06:26:55,IDC FOR HQ 3000M LINE  202020202,正常(Normal)
+test1222,,ISR4451-X/K9,isr4400-universalk9.03.16,router,xxdxdxedddddxdxd,ad account,SH-IDC,,,2020-06-08 06:27:34,2020-06-08 06:27:34,hahaha,已删除(Deleted)
+PNR01xxx02,172.16.1.2,ISR4451-X/K9,isr4400-universalk,router,FGL225xxxxxxHE,ad account,SH-IDC,2020-0220,400-xxx-xx-x,2020-06-17 15:00:48,2020-06-08 07:35:26,"hahaha  34M 
+哈哈",正常(Normal)
+pns01xxxxx-1,172.16.1.4,WS-C3850,,switch-stack,FGLDF1xxxx05H,,SH-HQ,,,2020-06-17 15:01:18,2020-06-10 07:49:05,1111,正常(Normal)
+pns01xxxxx-1,172.25.1.4,WS-C3850,,switch-stack,,,SH-HQ,,,2020-06-17 15:00:31,2020-06-10 10:26:42,,正常(Normal)
+pns01shahq-1223rr,172.25.180.166,WS-C3850-48P-E,,app_server,,,SH-HQ,,,2020-06-12 09:23:26,2020-06-10 10:37:50,立刻就会给房东手里空间和规范,已删除(Deleted)
+A-HHA2D-AS1-FW01,172.16.1.10,ASA5585-SSP-40,asa845-smp-k8.bin,other,JAXXX3000WH,TACAS,SH-IDC,,,2020-06-17 15:04:39,2020-06-17 15:04:39,friewall,正常(Normal)
