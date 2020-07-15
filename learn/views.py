@@ -16,7 +16,9 @@ import os
 # coding:utf-8
 
 def test(request):
-    return render(request, 'test.html')
+    # return render(request, 'test.html')
+    next_url = "http://localhost:8888/?hostname=192.168.1.7&username=pi&password=aGE=&title=my-ssh-server&term=xterm-256color"
+    return HttpResponseRedirect(next_url)
 
 def app_login(request):
     if request.method == 'POST':
