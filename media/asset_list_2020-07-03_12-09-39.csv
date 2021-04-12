@@ -1,0 +1,3 @@
+﻿device_name,manage_ip,produce,os_software_version,device_type,serial_number,login_u_p,location,warranty_expiration,service_contract,last_modification_timestamp,initialization_timestamp,comments,device_op
+pnr01isp,172.25.20.128,ISR4451-X/K9,isr4400-universalk9.03.16.04b.S.155-3.S4b-ext.SPA.,router,FGL202511HA,AD,SH-IDC,9/18/2019,95598639,2020-07-01 15:19:16,2020-07-01 15:19:16,CISCO ID:bby-network,正常(Normal)
+pnr01nso,172.25.18.165,ISR4451-X/K9,isr4400-universalk9.03.16.03.S.155-3.S3-ext.SPA.bi,router,FGL202511HE,AD,SH-IDC,6/30/2021,95598639,2020-07-01 15:38:54,2020-07-01 15:38:54,CISCO ID:bby-network,正常(Normal)

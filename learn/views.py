@@ -104,7 +104,7 @@ def index(request):
 
 @login_required()
 def topology_view(request):
-    return render(request, 'OMS_BBY.html')
+    return render(request, 'BBY_topology_v 1.0.html')
 
     
 @login_required()
