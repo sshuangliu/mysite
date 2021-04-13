@@ -1,4 +1,4 @@
-mysite pwd:admin/123456
+﻿mysite pwd:admin/123456
 
 python manage.py startapp learn
 
@@ -49,3 +49,5 @@ static_file:
 https://code.ziqiangxuetang.com/django/django-static-files.html
 https://blog.csdn.net/jehon/article/details/80101251
 
+token authen：
+https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/
