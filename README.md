@@ -55,12 +55,22 @@ python manage.py runserver 0.0.0.0:8000
 # 访问对应的 ip加端口，比如 http://172.16.20.2:8000
 ~~~
 
+~~~
+集成了一个开源的webssh项目，通过Apache 反向代理配置，详细部署请转到该webssh项目
+
+[webssh](https://github.com/huashengdun/webssh)
+
+~~~
+
 ##### Screenshot
 
 ![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/login.png)
 
-![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/asset.png)
+![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/asset_new.png)
 
 ![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/device_add.png)
 
+![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/webssh_login.png)
+
+![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/webssh_show.png)
 
