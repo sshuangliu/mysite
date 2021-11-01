@@ -3,6 +3,8 @@ set https_proxy=http://127.0.0.1:10809
 
 set https_proxy=http://username:password@proxydomain:port
 
+$env:all_proxy="socks5://127.0.0.1:10808"
+
 C:\Users\AA340261\Downloads\Dj_cmdb\cmdb_bby\Scripts\activate.bat
 C:\Users\AA340261\Downloads\Dj_cmdb\cmdb_bby\Scripts\deactivate.bat
 
