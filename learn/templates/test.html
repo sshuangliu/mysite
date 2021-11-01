@@ -1,49 +1,70 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8"> 
-	<title>Bootstrap 实例 - 标签页（Tab）插件</title>
-	<link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
-<body>
+{% extends 'test2.html' %}
 
-<ul id="myTab" class="nav nav-tabs">
-	<li class="active">
-		<a href="#home" data-toggle="tab">
-			 菜鸟教程
-		</a>
-	</li>
-	<li><a href="#ios" data-toggle="tab">iOS</a></li>
-	<li class="dropdown">
-		<a href="#" id="myTabDrop1" class="dropdown-toggle" 
-		   data-toggle="dropdown">Java 
-			<b class="caret"></b>
-		</a>
-		<ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-			<li><a href="#jmeter" tabindex="-1" data-toggle="tab">jmeter</a></li>
-			<li><a href="#ejb" tabindex="-1" data-toggle="tab">ejb</a></li>
-		</ul>
-	</li>
-</ul>
-<div id="myTabContent" class="tab-content">
-	<div class="tab-pane fade in active" id="home">
-		<p>菜鸟教程是一个提供最新的web技术站点，本站免费提供了建站相关的技术文档，帮助广大web技术爱好者快速入门并建立自己的网站。菜鸟先飞早入行——学的不仅是技术，更是梦想。</p>
-	</div>
-	<div class="tab-pane fade" id="ios">
-		<iframe name="footer" marginwidth=0 marginheight=0 width=100% height=600 src="http://localhost:8888/?hostname=192.168.1.7&username=pi&password=aGE=&title=my-ssh-server&term=xterm-256color" frameborder=0>
-    </iframe>
- 
-	</div>
-	<div class="tab-pane fade" id="jmeter">
-		<p>jMeter 是一款开源的测试软件。它是 100% 纯 Java 应用程序，用于负载和性能测试。</p>
-	</div>
-	<div class="tab-pane fade" id="ejb">
-		<p>Enterprise Java Beans（EJB）是一个创建高度可扩展性和强大企业级应用程序的开发架构，部署在兼容应用程序服务器（比如 JBOSS、Web Logic 等）的 J2EE 上。
-		</p>
-	</div>
+{% block title %}
+    test page
+{% endblock title %}
+
+{% block body %}
+
+
+ <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #333;">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+<div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+  <div class="card-header">通告~~~</div>
+  <div class="card-body">
+    <h5 class="card-title">网址信息：</h5>
+    <p class="card-text">PRTG:<br>https://x.x.x.x/index.htm<br><br>
+    Solarwinds:<br>http://x.x.x.x/Orion</p>
+  </div>
 </div>
 
-</body>
-</html>
+<div class="card text-white bg-secondary mb-3" style="max-width: 20rem;">
+  <div class="card-header">Header</div>
+  <div class="card-body">
+    <h5 class="card-title">Secondary card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+  </div>
+</div>
+
+  <div class="alert alert-primary" role="alert">
+  A simple primary alert—check it out!
+</div>
+
+
+
+{% endblock body %}

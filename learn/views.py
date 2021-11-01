@@ -16,9 +16,7 @@ import os
 # coding:utf-8
 
 def test(request):
-    # return render(request, 'test.html')
-    next_url = "http://localhost:8888/?hostname=192.168.1.7&username=pi&password=aGE=&title=my-ssh-server&term=xterm-256color"
-    return HttpResponseRedirect(next_url)
+    return render(request, 'test.html')
 
 def app_login(request):
     if request.method == 'POST':
@@ -106,7 +104,7 @@ def index(request):
 
 @login_required()
 def topology_view(request):
-    return render(request, 'BBY_topology_v 1.0.html')
+    return render(request, 'BBY_topology_v 2.0.html')
 
     
 @login_required()
@@ -229,5 +227,5 @@ def device_del(request, device_id):
         del_item.device_op = False
         del_item.save()
         return render(request, 'popup.html', {'infor': 'delete success!'})
-    except CMDB_ASSET.DoesNotExist:
+    except OPRS_DB.DoesNotExist:
         return render(request, 'popup.html', {'infor': '此设备不存在或已被删除！!'})

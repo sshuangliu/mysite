@@ -1,4 +1,14 @@
-﻿mysite pwd:admin/123456
+﻿set http_proxy=http://127.0.0.1:10809
+set https_proxy=http://127.0.0.1:10809
+
+set https_proxy=http://username:password@proxydomain:port
+
+C:\Users\AA340261\Downloads\Dj_cmdb\cmdb_bby\Scripts\activate.bat
+C:\Users\AA340261\Downloads\Dj_cmdb\cmdb_bby\Scripts\deactivate.bat
+
+mysite pwd:admin/123456
+
+pip install django==3.0.7
 
 python manage.py startapp learn
 
