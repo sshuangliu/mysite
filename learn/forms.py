@@ -78,6 +78,11 @@ class Device_infor(forms.Form):
                                     widget=forms.TextInput(attrs={'class': "form-control"})
                                     )
 
+	monitor_choices = ((False, 'disable'), (True, 'enable'))
+	monitor_or_not = forms.BooleanField(label='监控开关',
+									required=False,
+									widget=forms.Select(choices=monitor_choices, attrs={"class": "form-control"}))
+
 	comments = forms.CharField(required=False,
 							label='备注(comments)',
 							widget=forms.Textarea(attrs={'class': "form-control"}))
@@ -106,8 +111,15 @@ class Device_infor(forms.Form):
 	def clean_serial_number(self):
 		serial_number = self.cleaned_data.get('serial_number')
 		if serial_number != '' and CMDB_ASSET.objects.filter(serial_number=serial_number).exists():
-			raise forms.ValidationError('serial_number已存在！')  # 抛出异常到form.字段.errow 类
+			raise forms.ValidationError('serial_number已存在！')  # 抛出异常到form.字段.error 类
 		return serial_number
+
+	def clean_monitor_or_not(self):
+		manage_ip = self.cleaned_data.get('manage_ip')
+		monitor_or_not = self.cleaned_data.get('monitor_or_not')
+		if not manage_ip and monitor_or_not == True: # 没有管理IP，却要enable监控，会报错
+			raise forms.ValidationError('manage_ip 不存在！')  # 抛出异常到form.字段.errow 类
+		return monitor_or_not
 
 
 class Device_update(forms.Form):
@@ -185,6 +197,13 @@ class Device_update(forms.Form):
                                     widget=forms.TextInput(attrs={'class': "form-control"})
                                     )
 
+
+	monitor_choices = ((False, 'disable'), (True, 'enable'))
+	monitor_or_not = forms.BooleanField(label='监控开关',
+									required=False,
+									widget=forms.Select(choices=monitor_choices, attrs={"class": "form-control"}))
+
+
 	comments = forms.CharField(required=False,
 							label='备注(comments)',
 							widget=forms.Textarea(attrs={'class': "form-control"}))
@@ -195,14 +214,14 @@ class Device_update(forms.Form):
 		device_id = self.cleaned_data.get('device_id')
 		device_type = self.cleaned_data.get('device_type')
 		manage_ip = self.cleaned_data.get('manage_ip')
-		print(f'device_name{device_name}')
-		print(f'device_id{device_id}')
-		print(f'device_type{device_type}')
-		print(f'manage_ip{manage_ip}')
+		# print(f'device_name{device_name}')
+		# print(f'device_id{device_id}')
+		# print(f'device_type{device_type}')
+		# print(f'manage_ip{manage_ip}')
 		if device_type != 'switch-stack':
 			if [item for item in CMDB_ASSET.objects.filter(device_name=device_name) if item.id != int(device_id)] or \
 			[item for item in CMDB_ASSET.objects.filter(manage_ip=manage_ip) if item.id != int(device_id)]:
-			 # if为false，即查不到信息时，不一定完全正确，可能是一个已被删除(物理删除，非逻辑删除)的设备，最终判断交给view device_update主函数
+			 # if为false，即查不到信息时，不一定完全正确，可能是一个已被删除(逻辑删除，非物理删除)的设备，更新已删除的设备会报错，最终判断交给view device_update主函数
 				msg = "device_name or manage_ip can't duplicate when device_type is none switch-stack"
 				msg2 = ''
 				self.add_error('device_name', msg)  # 将error信息分配给一个指定field,fidle字段级别error
@@ -246,6 +265,14 @@ class Device_update(forms.Form):
 		return serial_number
 
 
+	def clean_monitor_or_not(self):
+		manage_ip = self.cleaned_data.get('manage_ip')
+		monitor_or_not = self.cleaned_data.get('monitor_or_not')
+		if not manage_ip and monitor_or_not == True: # 没有管理IP，却要enable监控，会报错
+			raise forms.ValidationError('manage_ip 不存在！')  # 抛出异常到form.字段.error 类
+		return monitor_or_not
+
+
 class UserForm(forms.Form):
 	username = forms.CharField(label=False,
                                max_length=10,
@@ -258,3 +285,6 @@ class UserForm(forms.Form):
                                widget=forms.PasswordInput(
                                    attrs={"class": "form-control", "placeholder": "Password: "})
                                )
+
+
+
