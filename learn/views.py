@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from learn.models import CMDB_ASSET, IP_monitor
 from learn.forms import Device_infor, Device_update, UserForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 import json
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import permission_required
@@ -262,3 +262,9 @@ def device_del(request, device_id):
         return render(request, 'popup.html', {'infor': 'delete success!'})
     except CMDB_ASSET.DoesNotExist:
         return render(request, 'popup.html', {'infor': '此设备不存在或已被删除！!'})
+
+
+@login_required()
+def ajax_ip_monitor(request):
+    pass
+    return JsonResponse({'labelname': labelname})

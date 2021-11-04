@@ -1,3 +1,4 @@
+# https://blog.csdn.net/yangwohenmai1/article/details/88960935
 <html>
 <head>
    <title>Title</title>
@@ -34,5 +35,25 @@
       })
   })
 </script>
+
+ 
+<script>
+ 
+function myrefresh() {
+    var str ="";
+    for(var i = 0; i<5; i++){
+        str += "<tr><td>"+i+"</td><td>"+i+"</td><td>"+i
+            +"</td><td>"+i+"</td><td>"+i+"</td><td>"+i+"</td></tr>"
+    }
+}
+ 
+$("#test").html(str);
+ 
+//这一句是加载页面后3秒钟调用一次myrefresh方法，方便看刷新效果
+setInterval('myrefresh()',3000);
+ 
+</script>
+
+
 </body>
 </html>
