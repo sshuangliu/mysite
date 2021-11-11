@@ -33,4 +33,5 @@ urlpatterns = [
     path('download/<str:asset>', learn_views.download, name='download'),
     path('test', learn_views.test, name='test'),
     path('topology_view', learn_views.topology_view, name='topology_view'),
+    path('disable_monitor', learn_views.disable_monitor, name='disable_monitor'),
 ]

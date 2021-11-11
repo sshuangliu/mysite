@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from learn.models import CMDB_ASSET, IP_monitor
-from learn.forms import Device_infor, Device_update, UserForm
+from learn.forms import Device_infor, Device_update, UserForm, Disable_monitor
 from django.http import HttpResponseRedirect, JsonResponse
 import json
 from django.contrib.auth.decorators import login_required
@@ -11,6 +11,9 @@ import csv,codecs
 from django.http import FileResponse
 from datetime import datetime
 import os
+import re
+from netaddr import *
+
 # Create your views here.
 
 # coding:utf-8
@@ -106,6 +109,29 @@ def index(request):
 def topology_view(request):
     return render(request, 'BBY_topology_v 2.0.html')
 
+@login_required()
+def disable_monitor(request):
+    form = Disable_monitor()
+    if request.method == 'GET':
+        return render(request, 'disable_monitor.html', {'form': form})
+    elif request.method == 'POST':
+        form_post = Disable_monitor(request.POST)
+        ip_list_f1 = request.POST.get('ip_list')
+        ip_list_f2 = ip_list_f1.strip(' \r\n').splitlines()
+        print(ip_list_f2)
+        for i in ip_list_f2:
+            i = re.split(r'\s+', i.strip(' '))
+            print(i)
+            if IP_monitor.objects.filter(manage_ip=i[0]).exists():
+                ip_monitor_item = IP_monitor.objects.get(manage_ip=i[0])
+                if i[1] == 'enable':
+                    ip_monitor_item.monitor_or_not = True
+                    ip_monitor_item.save()
+                elif i[1] == 'disable':
+                    ip_monitor_item.monitor_or_not = False
+                    ip_monitor_item.save()
+        return render(request, 'disable_monitor.html', {'form': form_post, 'successmessage': '设备监控更改OK!'})
+
     
 @login_required()
 def mainpage(request):
@@ -142,7 +168,8 @@ def device_select(request, successmessage=None, errormessage=None):
         # 吧新表ip_monitor的数据嵌套入cmdb_asst_all
     # cmdb_asset_all = [i.update(ip_monitor_all.get(str(i.get('manage_ip')))) for i in cmdb_asset_all]
     for i in cmdb_asset_all:
-        i.update(ip_monitor_all.get(str(i.get('manage_ip'))))
+        if ip_monitor_all.get(str(i.get('manage_ip'))):
+            i.update(ip_monitor_all.get(str(i.get('manage_ip'))))
     # print(cmdb_asset_all)
     print(cmdb_asset_all)
     return render(request, 'device_select.html',
@@ -177,11 +204,12 @@ def device_add(request, successmessage=None, errormessage=None):
                                comments=request.POST.get('comments'),
                                )
             device_base.save()
-            ip_monitor_base = IP_monitor(
+            if request.POST.get('manage_ip'):
+                ip_monitor_base = IP_monitor(
                                 manage_ip=request.POST.get('manage_ip'),
                                 monitor_or_not=request.POST.get('monitor_or_not'),
                                 )
-            ip_monitor_base.save()
+                ip_monitor_base.save()
             return render(request, 'device_add.html', {'form': form, 'successmessage': '设备添加完成!'})
         else:
             return render(request, 'device_add.html', {'form': form_post})  # 如果clear函数后台校验不通过，则把数据原封不动返回
@@ -192,7 +220,7 @@ def device_update(request, device_id, successmessage=None, errormessage=None):
     if request.method == 'GET':
         #try:  # 多人操作时，在查询界面上，A删除后，B没有刷新页面，编辑不存在的设备时 DoesNotExist的捕获
         item = CMDB_ASSET.objects.get(id=device_id) # get方法只能获取单个条目，如果有多个或者没有，则抛出MultipleObjectsReturned DoesNotExist异常
-        if item.device_op == True:  #条目逻辑删除(置为false), 条目一直存在，不会产生DoesNotExist的的异常
+        if item.device_op == True and item.manage_ip:  #条目逻辑删除(置为false), 条目一直存在，不会产生DoesNotExist的的异常
             if not IP_monitor.objects.filter(manage_ip=item.manage_ip).exists(): # 返回一个bool值
                 ip_monitor_base = IP_monitor(
                                     manage_ip=item.manage_ip,
@@ -217,6 +245,25 @@ def device_update(request, device_id, successmessage=None, errormessage=None):
             })
 
             return render(request, 'device_update.html', {'form': init_form, 'device_id': device_id})
+        elif item.device_op == True and not item.manage_ip:
+            init_form = Device_update(initial={
+            'device_id': item.id,
+            'device_name': item.device_name,
+            'manage_ip': item.manage_ip,
+            'produce': item.produce,
+            'os_software_version': item.os_software_version,
+            'device_type': item.device_type,
+            'serial_number': item.serial_number,
+            'login_u_p': item.login_u_p,
+            'location': item.location,
+            'warranty_expiration': item.warranty_expiration,
+            'service_contract': item.service_contract,
+            'monitor_or_not': False,
+            'comments': item.comments
+            })
+
+            return render(request, 'device_update.html', {'form': init_form, 'device_id': device_id})
+
         #except CMDB_ASSET.DoesNotExist:
         elif item.device_op == False:  # 条目逻辑删除(置为false)，条目一直存在，不会产生DoesNotExist的的异常
             return render(request, 'popup.html', {'infor': '此设备不存在或已被删除！!!'})
@@ -226,8 +273,8 @@ def device_update(request, device_id, successmessage=None, errormessage=None):
         if form_post.is_valid():
             #try:  # 多人操作时，在update界面上 ，A删除后，B没有刷新页面，更新不存在的设备时 DoesNotExist的捕获
             item = CMDB_ASSET.objects.get(id=device_id)
-            ip_monitor_item = IP_monitor.objects.get(manage_ip=item.manage_ip)
-            if item.device_op == True:
+            
+            if item.device_op == True and request.POST.get('manage_ip'):
                 item.device_name = request.POST.get('device_name')
                 item.manage_ip = request.POST.get('manage_ip')
                 item.produce = request.POST.get('produce')
@@ -240,6 +287,13 @@ def device_update(request, device_id, successmessage=None, errormessage=None):
                 item.service_contract = request.POST.get('service_contract')
                 item.comments = request.POST.get('comments')
                 item.save()
+                if not IP_monitor.objects.filter(manage_ip=request.POST.get('manage_ip')).exists(): # 返回一个bool值
+                    ip_monitor_base = IP_monitor(
+                                    manage_ip=request.POST.get('manage_ip'),
+                                    monitor_or_not=request.POST.get('monitor_or_not'),
+                                    )
+                    ip_monitor_base.save()
+                ip_monitor_item = IP_monitor.objects.get(manage_ip=request.POST.get('manage_ip'))
                 ip_monitor_item.monitor_or_not = request.POST.get('monitor_or_not')
                 ip_monitor_item.save()
 
@@ -254,8 +308,8 @@ def device_update(request, device_id, successmessage=None, errormessage=None):
 def device_del(request, device_id):
     try:
         del_item = CMDB_ASSET.objects.get(id=device_id)
-        del_item.device_op = False
-        del_item.save()
+        # del_item.device_op = False
+        del_item.delete()
         if IP_monitor.objects.filter(manage_ip=del_item.manage_ip).exists(): # 返回一个bool值
             ip_monitor_item = IP_monitor.objects.get(manage_ip=del_item.manage_ip)
             ip_monitor_item.delete()

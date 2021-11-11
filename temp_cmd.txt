@@ -1,9 +1,17 @@
-﻿set http_proxy=http://127.0.0.1:10809
+set http_proxy=http://127.0.0.1:10809
 set https_proxy=http://127.0.0.1:10809
 
 set https_proxy=http://username:password@proxydomain:port
 
 $env:all_proxy="socks5://127.0.0.1:10808"
+
+git config --global https.proxy http://127.0.0.1:10809
+
+git config --global https.proxy https://127.0.0.1:10809
+
+git config --global --unset http.proxy
+
+git config --global --unset https.proxy
 
 C:\Users\AA340261\Downloads\Dj_cmdb\cmdb_bby\Scripts\activate.bat
 C:\Users\AA340261\Downloads\Dj_cmdb\cmdb_bby\Scripts\deactivate.bat
@@ -60,6 +68,12 @@ hahaahhahh
 static_file:
 https://code.ziqiangxuetang.com/django/django-static-files.html
 https://blog.csdn.net/jehon/article/details/80101251
+python manage.py collectstatic
+
 
 token authen：
 https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/
+
+
+
+

@@ -1,0 +1,44 @@
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+{% extends 'base.html' %}
+
+{% block title %}
+    Disable_monitor
+{% endblock title %}
+
+{% block body %}
+
+<div class="container">
+
+{% include 'notifaction.html' %}
+<form action="", method="post">
+{# CSRF跨站请求伪造 #}
+{# 添加CSRF防护的隐含参数Token,这是必须配置内容,并不是可选,注意使用render来渲染页面 #}
+{% csrf_token %}
+{#渲染表单参考文档#}
+{#https://docs.djangoproject.com/en/dev/topics/forms/#rendering-fields-manually#}
+{#{{ form.as_table }}<br> form的属性会自动unpack，例如以tab形式展开 #}
+{# <tr class="required"><th><label class="required" for="id_device_name">设备名:</label></th><td><input type="text" name="device_name" class="form-control" maxlength="50" required id="id_device_name"></td></tr>   #}
+{# 手动提取form属性展开 #}
+{# fomr表单级别的error #}
+{# <div style="display: inline;color: crimson" >{{ form.errors }}</div> #}
+{% for field in form %}
+    <div class="fieldWrapper">
+    	<br>
+        <span><div style="display: inline" >{{ field.label_tag }}</div></span>
+        <br><br>
+        {# 字段级别的error #}
+        <span><div style="display: inline;color: crimson" >{{ field.errors }}</div></span>
+        {{ field }}
+        {% if field.help_text %}
+        <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+    </div>
+{% endfor %}
+<br>
+{# 调整了bootstrap的显示样式 https://getbootstrap.com/docs/4.1/components/buttons/#button-tags#}
+    <input class="btn btn-primary btn-lg" type='submit' value='提交'>
+</form>
+</div>
+
+	
+{% endblock body %}

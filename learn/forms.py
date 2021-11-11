@@ -288,3 +288,7 @@ class UserForm(forms.Form):
 
 
 
+class Disable_monitor(forms.Form):
+	ip_list = forms.CharField(required=False,
+							label='ip列表(ip list)',
+							widget=forms.Textarea(attrs={'class': "form-control"}))
