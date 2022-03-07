@@ -6,9 +6,8 @@ RUN mkdir -p /var/www/html/mysite
 WORKDIR /var/www/html/mysite
 ADD . /var/www/html/mysite
 
-RUN \
-  pip install -r requirements.txt && \
-  python manage.py makemigrations && \
-  python manage.py migrate && \
-  uwsgi --ini /var/www/html/mysite/uwsgi.ini
+# eee
+RUN pip install -r requirements.txt
+RUN sed -i 's/\r//' ./start.sh
+RUN chmod +x ./start.sh
 
