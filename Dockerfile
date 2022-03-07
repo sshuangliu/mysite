@@ -7,8 +7,8 @@ WORKDIR /var/www/html/mysite
 ADD . /var/www/html/mysite
 
 RUN \
+  pip install -r requirements.txt && \
   python manage.py makemigrations && \
   python manage.py migrate && \
-  uwsgi --ini /var/www/html/mysite/uwsgi.ini && \
-  pip install -r requirements.txt
+  uwsgi --ini /var/www/html/mysite/uwsgi.ini
 
