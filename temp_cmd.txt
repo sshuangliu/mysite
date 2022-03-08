@@ -75,5 +75,24 @@ token authen：
 https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/
 
 
+https://mp.weixin.qq.com/s?__biz=MjM5OTMyODA4Nw==&mid=2247484591&idx=1&sn=e67179a08b1ad61f92253587595ef0e2&chksm=a73c6497904bed81ff34bed3d8a73bfd37ea1cb14a0b142b8e066f31ae0314868e4319f267b7&scene=21#wechat_redirect
+
+docker run -d -it --name mysite django_mysite:v1
+docker exec -it mysite /bin/bash
+docker run -it -p 8019:443 --name mysite-nginx \
+ -v /mysite_cmdb_demo/mysite/collected_static:/usr/share/nginx/html/static \
+ -v /mysite_cmdb_demo/mysite/media:/usr/share/nginx/html/media \
+ -v /mysite_cmdb_demo/mysite/compose/nginx/log:/var/log/nginx \
+ -v /mysite_cmdb_demo/mysite/compose/nginx/ssl:/usr/share/nginx/ssl \
+ -v /mysite_cmdb_demo/mysite/compose/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf \
+ -d mynginx:v1
+
+
+docker build -t django_mysite:v1 .
+
+as59105homenoc
+useradd readonlyuser
+
+
 
 
