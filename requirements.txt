@@ -1,4 +1,4 @@
-Django==3.0.7
+Django==3.1.14
 uwsgi==2.0.18
 netaddr==0.8.0
 zmail==0.2.8
