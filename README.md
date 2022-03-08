@@ -5,7 +5,7 @@ GitHub supports emoji!
 
 ##### 介绍
 
-演示网站：https://111.229.52.229:8019/mainpage/
+演示网站：https://111.229.52.229:8019/mainpage/   (admin/123456)
 
 基于Django web项目 （入门教程可以参考这个：https://code.ziqiangxuetang.com/django/django-tutorial.html
 
