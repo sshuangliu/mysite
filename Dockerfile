@@ -9,10 +9,6 @@ RUN chown -R www-data:www-data /var/www/html/mysite
 # eee
 RUN pip install -r requirements.txt
 RUN sed -i 's/\r//' ./start.sh
+USER www-data
 RUN chmod +x ./start.sh
-
 ENTRYPOINT ["./start.sh"]
-
-
-
-
