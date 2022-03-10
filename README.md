@@ -14,6 +14,11 @@ GitHub supports emoji!
 前端参考了一个开源项目，觉得挺酷的，搬运了这个项目的部分前端代码，
 
 [ansible-cmdb](https://github.com/fboender/ansible-cmdb)
+
+集成的webssh:
+[ansible-cmdb](https://github.com/huashengdun/webssh)
+
+
 ##### 环境
 Django 3.x
 
@@ -28,4 +33,4 @@ python 3.x
 
 ![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/device_add.png)
 
-
+![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/webssh_newdemo.jpg)
