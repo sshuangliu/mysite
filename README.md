@@ -17,7 +17,7 @@ GitHub supports emoji!
 
 集成的webssh:
 
-[ansible-cmdb](https://github.com/huashengdun/webssh)
+[wessh](https://github.com/huashengdun/webssh)
 
 
 ##### 环境
