@@ -43,8 +43,8 @@ class notice:
                 'content_text': msg # Anything you want.
                 # 'attachments': ['/Users/zyh/Documents/example.zip','/root/1.jpg'],  # Absolute path will be better.
                 }
-            server = zmail.server('904680136@qq.com', 'xcpscbxggnrqbdfc')
-            server.send_mail('aa340261@bestbuy.com', mail)
+            server = zmail.server('904345673456786@qq.com', '34567234567345sdfghj')
+            server.send_mail('aaxxxxoo@xyz.com', mail)
             # server.send_mail(['foo@163.com','foo@126.com'],mail,cc=['bar@163.com'])
 
 
