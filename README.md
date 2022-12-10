@@ -35,3 +35,7 @@ python 3.x
 ![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/device_add.png)
 
 ![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/webssh_newdemo.jpg)
+
+![image](https://github.com/sshuangliu/mysite/blob/master/readmeImage/diagram.png)
+
+
